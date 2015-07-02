@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- @copyright Copyright (c) 2013 Denis Seghetti - It Serv - http://www.it-serv.it -->
+<config>
+  <modules>
+      <Itserv_Feed>
+          <active>true</active>
+          <codePool>local</codePool>
+      </Itserv_Feed>
+  </modules>
+</config>
