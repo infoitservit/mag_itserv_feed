@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <feedconfig module="itserv_feed">
+            <label>It Serv Feed</label>
+            <sort_order>999</sort_order>
+        </feedconfig>
+    </tabs>
+    <sections>
+        <feed_options translate="label" module="itserv_feed">
+            <label>Feed Comparatori</label>
+            <tab>feedconfig</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <!-- New groups go here -->
+                <configurazione_generale translate="label">                    
+                    <label>Configurazione Generale</label>                    
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <status translate="label comment">
+                            <label>Attiva Il Sistema</label>
+                            <comment>
+                <![CDATA[Se attivo, il sistema esporterà i feed per le destinazioni selezionate tramite schedulazioni predefinite (una volta al giorno a mezzanotte)"]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </status>
+                        <destinazioni translate="label">
+                            <label>Attiva Destinazioni</label>
+                            <comment>
+                <![CDATA[Selezionare una o più destinazioni per le quali creare un apposito feed]]>
+                            </comment>              
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>itserv_feed/system_config_source_destinazioni</source_model>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </destinazioni> 
+                    </fields>
+                </configurazione_generale>
+                <mappa_attributi translate="label">
+                    <label>Mappatura Attributi</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!-- New fields go here -->
+                        <produttore translate="label comment">
+                            <label>Attributo "Produttore"</label>
+                            <comment>
+                <![CDATA[Indicare il codice dell'attributo che definisce il Brand/Produttore. Di default "manufacturer"]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </produttore>
+                        <ean translate="label comment">
+                            <label>Attributo "EAN"</label>
+                            <comment>
+                <![CDATA[Indicare il codice dell'attributo che definisce il codice EAN. Di default "ean"]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ean>
+                        <mpn translate="label comment">
+                            <label>Attributo "MPN"</label>
+                            <comment>
+                <![CDATA[Indicare il codice dell'attributo che definisce il codice MPN. Di default "mpn"]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mpn>                                    
+                    </fields>
+                </mappa_attributi> 
+                <spedizione>
+                    <label>Spedizioni</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <set_costo_spedizione translate="label comment">
+                            <label>Calcola Automaticamente Costo Spedizione</label>
+                            <comment>
+                <![CDATA[Se attivo, il sistema calcolerà il costo per ogni singolo prodotto del feed (elaborazione molto lenta e pesante). <br/>Viceversa il sistema userà il valore impostato nel campo "Costo della Spedizione"]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_costo_spedizione>
+                        <costo_spedizione translate="label comment">
+                            <label>Costo della Spedizione</label>
+                            <comment>
+                <![CDATA[Indicare il costo della spedizione da applicare ad ogni prodotto]]>
+                            </comment>
+                            <frontend_type>text</frontend_type> 
+                            <depends>
+                                <set_costo_spedizione>0</set_costo_spedizione>
+                            </depends>             
+                            <validate>validate-number validate-not-negative-number</validate>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>            
+                        </costo_spedizione>
+                    </fields>
+                </spedizione>
+                <trovaprezzi>
+                    <label>Impostazioni Trovaprezzi</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <tempi_spedizione translate="label">
+                            <label>Tempi di Spedizione</label>              
+                            <frontend_type>select</frontend_type>
+                            <source_model>itserv_feed/system_config_source_trovaprezzi_tempispedizione</source_model>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </tempi_spedizione>            
+                    </fields>
+                </trovaprezzi>
+            </groups>
+        </feed_options>
+    </sections>
+</config>  
