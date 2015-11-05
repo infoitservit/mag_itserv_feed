@@ -29,7 +29,7 @@ class Itserv_Feed_Model_Prodotto_Shopping extends Itserv_Feed_Model_Prodotto_Abs
             'g:availability' => $this->getAvailability() ? 'in stock' : 'out of stock',
             'g:brand' => ($this->getBrand() != false) ? $this->getBrand() : 'Non definito',
             'g:mpn' => $this->getMpn(),            
-        );                      
+        );                                      
         
         if($this->getEan() != false) {
             $array["g:ean"] = $this->getEan();

@@ -113,7 +113,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 
     protected function getBrand() {
-        $this->_brand = ($this->_prodotto->getAttributeText('manufacturer') != "") ? $this->_prodotto->getAttributeText('manufacturer') : false;
+        $this->_brand = ($this->_prodotto->getAttributeText('manufacturer') != "") ? $this->_prodotto->getAttributeText('manufacturer') : false;        
         return $this->_brand;
     }
 

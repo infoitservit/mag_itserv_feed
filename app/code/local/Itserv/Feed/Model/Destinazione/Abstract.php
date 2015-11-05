@@ -49,7 +49,7 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
         //    in automatico un produttore "Non Definito". La speranza è che Google non respinga tale prodotto.        
             
             //$cache = Mage::app()->getCache();
-            //if(!$cache->load('itserv_feed_collection')) {
+            //if(!$cache->load('itserv_feed_collection')) {        
                 $_productCollection = Mage::getModel('catalog/product')->getCollection();
                 $_productCollection->addAttributeToSelect('*');                        
                 $_productCollection->addAttributeToSelect('stock_status');        
