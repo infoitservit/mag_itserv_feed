@@ -128,7 +128,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     protected function getEan() {
         $this->_ean = false;
         if($this->_prodotto->offsetExists('ean')) {
-            $this->_ean = ($this->_prodotto->getAttributeText('ean') != "") ? $this->_prodotto->getAttributeText('ean') : "Non Definito";            
+            $this->_ean = ($this->_prodotto->getData('ean') != "") ? $this->_prodotto->getData('ean') : "Non Definito";            
         }        
         return $this->_ean;
     }
