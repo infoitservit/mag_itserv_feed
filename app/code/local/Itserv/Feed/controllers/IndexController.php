@@ -17,7 +17,7 @@ class Itserv_Feed_IndexController extends Mage_Core_Controller_Front_Action {
         $model->salvaFileXml(); 
     }
     
-    public function esportaAction() {        
+    public function esportaAction() { 
         $esporta = Mage::getModel('itserv_feed/esporta')->run();
     }
 }

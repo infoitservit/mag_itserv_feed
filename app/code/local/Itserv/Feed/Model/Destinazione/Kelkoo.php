@@ -8,5 +8,11 @@
 
 class Itserv_Feed_Model_Destinazione_Kelkoo extends Itserv_Feed_Model_Destinazione_Abstract {                                                       
     protected $_nomeNodoCatalogo = 'products';
-    protected $_nomeNodoProdotto = 'product';          
+    protected $_nomeNodoProdotto = 'product';   
+    
+    protected function getProdotti() {
+        $_productCollection = parent::getProdotti();
+        Mage::getSingleton('cataloginventory/stock')->addInStockFilterToCollection($_productCollection);
+        return $_productCollection;
+    }
 }

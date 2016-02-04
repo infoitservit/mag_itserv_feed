@@ -2,10 +2,18 @@
 <config>
     <modules>
         <Itserv_Feed>
-            <version>1</version>
+            <version>1.0.9</version>
         </Itserv_Feed>
     </modules>
     <global>
+        <resources>
+            <itserv_feed_setup>
+                <setup>
+                    <module>Itserv_Feed</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </itserv_feed_setup>
+        </resources>
         <models>
             <itserv_feed>
                 <class>Itserv_Feed_Model</class>

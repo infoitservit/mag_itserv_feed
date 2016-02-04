@@ -118,18 +118,25 @@
                         <costo_spedizione translate="label comment">
                             <label>Costo della Spedizione</label>
                             <comment>
-                <![CDATA[Indicare il costo della spedizione da applicare ad ogni prodotto]]>
+                <![CDATA[Indicare il costo della spedizione da applicare ad ogni prodotto. Puoi utilizzare una variabile customizzata (solo valori piani): es. "{{codice_variabile}}. Attenzione, utilizzare solo valori interi o decimali senza valuta o altri caratteri alfanumerici. Es. 99.9 (ok), 75 (ok), € 99.9 -(non ok)"]]>
                             </comment>
                             <frontend_type>text</frontend_type> 
-                            <depends>
-                                <set_costo_spedizione>0</set_costo_spedizione>
-                            </depends>             
-                            <validate>validate-number validate-not-negative-number</validate>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>            
                         </costo_spedizione>
+                        <spedizione_gratuita translate="label comment">
+                            <label>Soglia Spedizione Gratuita</label>
+                            <comment>
+                <![CDATA[Al di sopra di questa soglia le spedizione saranno indicate come gratuite. Puoi utilizzare una variabile customizzata (solo valori piani): es. "{{codice_variabile}}". Attenzione, utilizzare solo valori interi o decimali senza valuta o altri caratteri alfanumerici. Es. 99.9 (ok), 75 (ok), € 99.9 -(non ok)]]>
+                            </comment>
+                            <frontend_type>text</frontend_type> 
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>            
+                        </spedizione_gratuita>
                     </fields>
                 </spedizione>
                 <trovaprezzi>
