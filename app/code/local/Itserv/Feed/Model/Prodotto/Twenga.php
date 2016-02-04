@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Itserv_Feed_Model_Prodotto_Trovaprezzi extends Itserv_Feed_Model_Prodotto_Abstract {
+class Itserv_Feed_Model_Prodotto_Twenga extends Itserv_Feed_Model_Prodotto_Abstract {
     /**
      * Ritorna un array contenente esattamente i campi (con nomi specifici) che andranno a costituire la struttura
      * del feed
