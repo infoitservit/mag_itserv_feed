@@ -16,7 +16,7 @@ class Itserv_Feed_Model_Prodotto_Topnegozi extends Itserv_Feed_Model_Prodotto_Ab
         
         $array = array(
             'prod_name' => $this->getTitle(),            
-            'prod_description' => strip_tags($this->getLongDescription()),
+            'prod_description' => strip_tags($this->getShortDescription()),
             'prod_full_price' => $this->getPrice(),
             'prod_price' => ($this->getSpecialPrice() == null) ? $this->getPrice() : $this->getSpecialPrice(),
             'prod_number' => $this->getSku(),
