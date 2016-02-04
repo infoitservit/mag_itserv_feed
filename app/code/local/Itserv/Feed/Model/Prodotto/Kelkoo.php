@@ -16,7 +16,7 @@ class Itserv_Feed_Model_Prodotto_Kelkoo extends Itserv_Feed_Model_Prodotto_Abstr
         
         $array = array(
             'title' => $this->getTitle(),
-            'product-url' => $this->getLink(),
+            'product-url' => $this->getLink()."?utm_source=kelkoo&utm_medium=cpc&utm_term=".$this->getSku()."&utm_campaign=kelkooppc",
             'description' => strip_tags($this->getShortDescription()),
             'merchant-category' => preg_replace('/\s+/', '', $this->getPathCategoria('#')),
             'delivery-cost' => $this->costoSpedizione(),                                
