@@ -13,5 +13,16 @@ Nel caso in cui si desideri utilizzare attributi come ean, brand/manufacturer/pr
 # Configurazione
 Da pannello di controllo -> configurazione -> itserv feed è possibile impostare i costi di spedizione standard per trovaprezzi. 
 
-# Installazione
-Utilizzare modgit
+# Installazione / Aggiornamento
+<ul>
+<li>Disattivare compilazione</li>
+<li>Disattivare cache</li>
+<li>Effettuare il logout dal pannello di controllo</li>
+<li>Installare aggiornare il modulo tramite modgit</li>
+<li>Aggiornare la compilazione</li>
+<li>Aggiornare/Pulire la cache</li>
+<li>Effettuare il login nel pannello di controllo</li>
+<li>Verificare l'esistenza dell'attributo itserv_feed</li>
+</ul>
+
+Per ESCLUDERE i prodotti dai singoli feed utilizzare l'apposito attributo presente nella scheda meta information di ogni prodotto

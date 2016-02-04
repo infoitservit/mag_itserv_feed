@@ -43,12 +43,8 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
         $_productCollection = Mage::getModel('catalog/product')->getCollection();
         $_productCollection->addAttributeToSelect('*');
         $_productCollection->addAttributeToSelect('stock_status');
-        //$_productCollection->addAttributeToSelect(Mage::getStoreConfig('feed_options/mappa_attributi/produttore'));
-        //$_productCollection->addAttributeToSelect(Mage::getStoreConfig('feed_options/mappa_attributi/ean'));
-        //$_productCollection->addAttributeToSelect(Mage::getStoreConfig('feed_options/mappa_attributi/mpn'));
-        //$_productCollection->addAttributeToSelect('itserv_feed');
         $_productCollection->addAttributeToFilter('type_id', Mage_Catalog_Model_Product_Type::TYPE_SIMPLE);
-
+        
         return $_productCollection;
     }
 

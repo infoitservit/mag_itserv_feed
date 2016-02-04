@@ -13,11 +13,13 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
     const Kelkoo = 'kelkoo';
     const Trovaprezzi = 'trovaprezzi';
     const Kirivo = 'trovaprezzi_kirivo';
+    const Topnegozi = 'topnegozi';
     
     const labelGoogleShopping = "Google Shopping";
     const labelTrovaprezzi = "Trovaprezzi";
     const labelKirivo = "Kirivo";
     const labelKelkoo = "Kelkoo";
+    const labelTopnegozi = "Topnegozi";
     
     public function toOptionArray()
     {
@@ -26,6 +28,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
             array('value'=>self::Trovaprezzi, 'label'=>self::labelTrovaprezzi),
             array('value'=>self::Kirivo, 'label'=>self::labelKirivo),                        
             array('value'=>self::Kelkoo, 'label'=>self::labelKelkoo),
+            array('value'=>self::Topnegozi, 'label'=>self::labelTopnegozi),
         );
     }
     
@@ -54,21 +57,5 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
             }
         }
         return false;
-    }
-    
-    public function getValueOpzioneGoogleShopping() {
-        return $this->getValueOpzioneByLabel(self::labelGoogleShopping);
-    }
-    
-    public function getValueOpzioneTrovaprezzi() {
-        return $this->getValueOpzioneByLabel(self::labelTrovaprezzi);
-    }
-    
-    public function getValueOpzioneKirivo() {
-        return $this->getValueOpzioneByLabel(self::labelKirivo);
-    }
-    
-    public function getValueOpzioneKelkoo() {
-        return $this->getValueOpzioneByLabel(self::labelKelkoo);
     }
 }
