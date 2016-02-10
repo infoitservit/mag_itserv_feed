@@ -11,7 +11,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     protected $_prodotto = false;
     protected $_availability = false;
     protected $_brand = false;
-    protected $_condition  = false;
+    protected $_condition = false;
     protected $_categoria = false;
     protected $_ean = false;
     protected $_imageLink = false;
@@ -23,15 +23,18 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     protected $_sku = false;
     protected $_specialPrice = false;
     protected $_title = false;
-    protected $_dataInizioFineOfferta = false; 
-    
+    protected $_dataInizioFineOfferta = false;
+    protected $_codiceValuta = false;
+    protected $_simboloValuta = false;
     protected $_sogliaSpedizioneGratuita;
     protected $_spedizioneBase;
 
-    public function __construct(Mage_Catalog_Model_Product $prodotto) {                        
-        $this->_prodotto = $prodotto; 
+    public function __construct(Mage_Catalog_Model_Product $prodotto) {
+        $this->_prodotto = $prodotto;
         $this->_sogliaSpedizioneGratuita = floatval(Mage::helper('itserv_feed')->getSogliaSpedizioneGratuita());
         $this->_spedizioneBase = floatval(Mage::helper('itserv_feed')->getSpedizioneBase());
+        $this->_codiceValuta = Mage::app()->getStore()->getCurrentCurrencyCode();
+        $this->_simboloValuta = Mage::app()->getLocale()->currency($this->_codiceValuta)->getSymbol();
     }
 
     protected function getTitle() {
@@ -45,12 +48,12 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 
     protected function getShortDescription($maxCaratteri = 300) {
-        $this->_shortDescription = strip_tags(substr($this->_prodotto->getShortDescription(),0, $maxCaratteri));        
+        $this->_shortDescription = strip_tags(substr($this->_prodotto->getShortDescription(), 0, $maxCaratteri));
         return $this->_shortDescription;
     }
 
     protected function getLongDescription($maxCaratteri = 300) {
-        $this->_longDescription = strip_tags(substr($this->_prodotto->getDescription(),0, $maxCaratteri));        
+        $this->_longDescription = strip_tags(substr($this->_prodotto->getDescription(), 0, $maxCaratteri));
         return $this->_longDescription;
     }
 
@@ -73,7 +76,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
         $this->_specialPrice = $this->_prodotto->getSpecialPrice();
         return floatval($this->_specialPrice);
     }
-    
+
     /**
      * Di default 'new'
      */
@@ -102,7 +105,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
             $data_fine_offerta = $data_fine_offerta->add(new DateInterval('P3M'));
             $data_fine_offerta = $data_fine_offerta->format('c');
         }
-        
+
         $this->_dataInizioFineOfferta = $data_inizio_offerta . '/' . $data_fine_offerta;
         return $this->_dataInizioFineOfferta;
     }
@@ -118,48 +121,56 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 
     protected function getBrand() {
-        $this->_brand = ($this->_prodotto->getAttributeText('manufacturer') != "") ? $this->_prodotto->getAttributeText('manufacturer') : false;        
+        $this->_brand = ($this->_prodotto->getAttributeText('manufacturer') != "") ? $this->_prodotto->getAttributeText('manufacturer') : false;
         return $this->_brand;
     }
 
     protected function getMpn() {
         $this->_mpn = $this->getSku();
-        if($this->_prodotto->offsetExists('mpn')) {
-            $this->_mpn = ($this->_prodotto->getAttributeText('mpn') != "") ? $this->_prodotto->getAttributeText('mpn') : "Non Definito";            
-        }           
+        if ($this->_prodotto->offsetExists('mpn')) {
+            $this->_mpn = ($this->_prodotto->getAttributeText('mpn') != "") ? $this->_prodotto->getAttributeText('mpn') : "Non Definito";
+        }
         return $this->_mpn;
     }
 
     protected function getEan() {
         $this->_ean = false;
-        if($this->_prodotto->offsetExists('ean')) {
-            $this->_ean = ($this->_prodotto->getData('ean') != "") ? $this->_prodotto->getData('ean') : "Non Definito";            
-        }        
+        if ($this->_prodotto->offsetExists('ean')) {
+            $this->_ean = ($this->_prodotto->getData('ean') != "") ? $this->_prodotto->getData('ean') : "Non Definito";
+        }
         return $this->_ean;
     }
 
-    protected function getPathCategoria($separatore = '&gt;') {
+    protected function getPathCategoria($separatore = '&gt;', $profondita = null) {
         $product_categories = $this->_prodotto->getCategoryIds();
         $path = "";
         if (count($product_categories != 0)) {
+            $profonditaCorrente = 0;
             foreach ($product_categories as $category_id) {
-                //Bypasso la categoria delle offerte
-                if ($category_id != 100) {
-                    $cat_obj = Mage::getModel('catalog/category')->load($category_id);
-                    //Evita nomi duplicati
-                    if (!strpos($path, $cat_obj->getName())) {
-                        $path .= $cat_obj->getName();
-                        if ($category_id != end($product_categories)) {
-                            $path .= " ".$separatore." ";
-                        }
-                    }
+                if ($profondita && $profonditaCorrente >= $profondita) {
+                    continue;
                 }
+                
+                //Bypasso la categoria delle offerte
+                $cat_obj = Mage::getModel('catalog/category')->load($category_id);
+                if($cat_obj->getData('itserv_feed_escludi_path')) {
+                    continue;
+                }
+                
+                //Evita nomi duplicati
+                if (!strpos($path, $cat_obj->getName())) {
+                    $path .= $cat_obj->getName();
+                        if($profonditaCorrente != (count($product_categories) - 1)) {
+                            $path .= " " . $separatore . " ";
+                        }
+                }
+                ++$profonditaCorrente;
             }
         }
         $this->_categoria = $path;
         return $this->_categoria;
     }
-    
+
     /**
      * Funzione che ritorna il costo della spedizione. Il valore dipende dalle
      * impostazioni di configurazione.
@@ -168,22 +179,29 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
      */
     protected function costoSpedizione() {
         $prezzoFinale = floatval(($this->_specialPrice == null) ? $this->_price : $this->_specialPrice);
-        if((Mage::getStoreConfig('feed_options/spedizione/set_costo_spedizione'))) {
+        if ((Mage::getStoreConfig('feed_options/spedizione/set_costo_spedizione'))) {
             //PARTE DA COMPLETARE. Dovrebbe ritornare un valore calcolato in automatico, preso magari
             //dal flat rate.
             return floatval(Mage::getStoreConfig('feed_options/spedizione/costo_spedizione'));
-        }
-        else {
-            if($this->_sogliaSpedizioneGratuita && $this->_sogliaSpedizioneGratuita < $prezzoFinale) {
+        } else {
+            if ($this->_sogliaSpedizioneGratuita && $this->_sogliaSpedizioneGratuita < $prezzoFinale) {
                 return 0;
             }
-            
-            if($this->_spedizioneBase) {
+
+            if ($this->_spedizioneBase) {
                 return floatval($this->_spedizioneBase);
             }
         }
-        
+
         return '';
+    }
+
+    public function getCodiceValuta() {
+        return $this->_codiceValuta;
+    }
+
+    public function getSimboloValuta() {
+        return $this->_simboloValuta;
     }
 
     abstract protected function getArrayCaratteristiche();

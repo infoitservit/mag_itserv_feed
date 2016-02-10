@@ -15,6 +15,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
     const Kirivo = 'trovaprezzi_kirivo';
     const Topnegozi = 'topnegozi';
     const Twenga = 'twenga';
+    const ShopAlike = 'shopalike';
     
     const labelGoogleShopping = "Google Shopping";
     const labelTrovaprezzi = "Trovaprezzi";
@@ -22,6 +23,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
     const labelKelkoo = "Kelkoo";
     const labelTopnegozi = "Topnegozi";
     const labelTwenga = "Twenga";
+    const labelShopAlike = "Shop Alike";
     
     public function toOptionArray()
     {
@@ -32,6 +34,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
             array('value'=>self::Kelkoo, 'label'=>self::labelKelkoo),
             array('value'=>self::Topnegozi, 'label'=>self::labelTopnegozi),
             array('value'=>self::Twenga, 'label'=>self::labelTwenga),
+            array('value'=>self::ShopAlike, 'label'=>self::labelShopAlike),
         );
     }
     

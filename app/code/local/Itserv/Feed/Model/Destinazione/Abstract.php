@@ -40,10 +40,25 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
     }
 
     protected function getProdotti() {
+        $_rootcatID = Mage::app()->getStore()->getRootCategoryId();
+        $categorieEscluse = Mage::getModel('catalog/category')->getCollection()
+                ->addAttributeToFilter('itserv_feed_escludi', 1);
+
+        $idsCategorieEscluse = array();
+        if($categorieEscluse != 0) {
+            foreach($categorieEscluse as $categoriaEsclusa) {
+                $idsCategorieEscluse[] = $categoriaEsclusa->getId();
+            }
+        }
+                
         $_productCollection = Mage::getModel('catalog/product')->getCollection();
         $_productCollection->addAttributeToSelect('*');
         $_productCollection->addAttributeToSelect('stock_status');
         $_productCollection->addAttributeToFilter('type_id', Mage_Catalog_Model_Product_Type::TYPE_SIMPLE);
+        
+        $_productCollection->joinField('category_id','catalog/category_product','category_id','product_id=entity_id',null,'left');
+        $_productCollection->addAttributeToFilter('category_id', array('nin' => $idsCategorieEscluse));
+        $_productCollection->groupByAttribute('entity_id');
         
         return $_productCollection;
     }
@@ -54,12 +69,13 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
      */
     public function preparaCatalogo() {
         $catalogo = $this->getProdotti();
+                
         $destinazioni = Mage::getModel('itserv_feed/system_config_source_destinazioni');
         $valueOpzioneDestinazione = $destinazioni->getValueOpzioneByCodice($this->getCodiceDestinazione());
 
         $array_prodotti_parsati = array();
         foreach ($catalogo as $_product) {
-            
+
             if (!$_product->getData('itserv_feed') || !in_array($valueOpzioneDestinazione, explode(',', $_product->getData('itserv_feed')))) {
                 $prodotto_destinazione = Mage::getModel("itserv_feed/prodotto_" . $this->getCodiceDestinazione() . "", $_product);
 
