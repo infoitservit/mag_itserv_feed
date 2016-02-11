@@ -55,7 +55,8 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
         $_productCollection->addAttributeToSelect('*');
         $_productCollection->addAttributeToSelect('stock_status');
         $_productCollection->addAttributeToFilter('type_id', Mage_Catalog_Model_Product_Type::TYPE_SIMPLE);
-        
+        $_productCollection->addAttributeToFilter('status', array('eq' => Mage_Catalog_Model_Product_Status::STATUS_ENABLED));
+       
         $_productCollection->joinField('category_id','catalog/category_product','category_id','product_id=entity_id',null,'left');
         $_productCollection->addAttributeToFilter('category_id', array('nin' => $idsCategorieEscluse));
         $_productCollection->groupByAttribute('entity_id');
@@ -69,7 +70,7 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
      */
     public function preparaCatalogo() {
         $catalogo = $this->getProdotti();
-                
+               var_dump(count($catalogo)); 
         $destinazioni = Mage::getModel('itserv_feed/system_config_source_destinazioni');
         $valueOpzioneDestinazione = $destinazioni->getValueOpzioneByCodice($this->getCodiceDestinazione());
 
