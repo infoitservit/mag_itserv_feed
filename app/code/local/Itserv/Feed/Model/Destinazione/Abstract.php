@@ -70,7 +70,7 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
      */
     public function preparaCatalogo() {
         $catalogo = $this->getProdotti();
-               var_dump(count($catalogo)); 
+                
         $destinazioni = Mage::getModel('itserv_feed/system_config_source_destinazioni');
         $valueOpzioneDestinazione = $destinazioni->getValueOpzioneByCodice($this->getCodiceDestinazione());
 
