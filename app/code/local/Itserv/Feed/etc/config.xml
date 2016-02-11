@@ -77,7 +77,7 @@
         <jobs>
             <itserv_feed_export>
                 <schedule>
-                    <cron_expr>* 0 * * *</cron_expr>
+                    <cron_expr>0 0 * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>itserv_feed/esporta::run</model>
