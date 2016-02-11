@@ -24,8 +24,6 @@ class Itserv_Feed_Model_Prodotto_Shopping extends Itserv_Feed_Model_Prodotto_Abs
             'g:image_link' => $this->getImageLink(),
             'g:condition' => $this->getCondition(),
             'g:price' => $this->getPrice(),
-            'g:sale_price' => $this->getSpecialPrice(),
-            'g:sale_price_effective_date' => $this->getDataInizioFineOfferta(),
             'g:availability' => $this->getAvailability() ? 'in stock' : 'out of stock',
             'g:brand' => ($this->getBrand() != false) ? $this->getBrand() : 'Non definito',
             'g:mpn' => $this->getMpn(),            
@@ -33,6 +31,11 @@ class Itserv_Feed_Model_Prodotto_Shopping extends Itserv_Feed_Model_Prodotto_Abs
         
         if($this->getEan() != false) {
             $array["g:ean"] = $this->getEan();
+        }
+        
+        if($this->getSpecialPrice() && ($this->getSpecialPrice() < $this->getPrice())) {
+            $array["g:sale_price"] = $this->getSpecialPrice();
+            $array["g:sale_price_effective_date"] = $this->getDataInizioFineOfferta();
         }
         
         return $array;
