@@ -44,7 +44,7 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
         $categorieEscluse = Mage::getModel('catalog/category')->getCollection()
                 ->addAttributeToFilter('itserv_feed_escludi', 1);
 
-        $idsCategorieEscluse = array();
+        $idsCategorieEscluse = array(0);
         if(count($categorieEscluse) != 0) {
             foreach($categorieEscluse as $categoriaEsclusa) {
                 $idsCategorieEscluse[] = $categoriaEsclusa->getId();
