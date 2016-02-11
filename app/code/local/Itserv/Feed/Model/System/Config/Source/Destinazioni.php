@@ -38,7 +38,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
         );
     }
     
-    public function getValueOpzioneByLabel(string $label) {
+    public function getValueOpzioneByLabel($label) {
         $attributeItservFeedName = Mage::helper('itserv_feed')->getItServFeedAttributeName();
         $attributeId = Mage::getResourceModel('eav/entity_attribute')->getIdByCode('catalog_product', $attributeItservFeedName);
         $collection =Mage::getResourceModel('eav/entity_attribute_option_collection')
@@ -56,7 +56,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
         return '';
     }
     
-    public function getValueOpzioneByCodice(string $codice) {
+    public function getValueOpzioneByCodice($codice) {
         foreach($this->toOptionArray() as $arrayDestinazione) {
             if($arrayDestinazione['value'] == $codice){
                 return $this->getValueOpzioneByLabel($arrayDestinazione['label']);

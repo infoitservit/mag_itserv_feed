@@ -45,7 +45,7 @@ abstract class Itserv_Feed_Model_Destinazione_Abstract {
                 ->addAttributeToFilter('itserv_feed_escludi', 1);
 
         $idsCategorieEscluse = array();
-        if($categorieEscluse != 0) {
+        if(count($categorieEscluse) != 0) {
             foreach($categorieEscluse as $categoriaEsclusa) {
                 $idsCategorieEscluse[] = $categoriaEsclusa->getId();
             }
