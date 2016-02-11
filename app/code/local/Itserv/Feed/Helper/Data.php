@@ -93,7 +93,7 @@ class Itserv_Feed_Helper_Data extends Mage_Core_Helper_Abstract {
         return '';
     }
     
-    public function pulisciStringaVariabileCustom(string $stringa) {
+    public function pulisciStringaVariabileCustom($stringa) {
         if($stringa) {
             return str_replace(array('{{', '}}'), '', $stringa);
         }
