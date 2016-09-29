@@ -16,6 +16,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
     const Topnegozi = 'topnegozi';
     const Twenga = 'twenga';
     const ShopAlike = 'shopalike';
+    const Facebook = 'facebook';
     
     const labelGoogleShopping = "Google Shopping";
     const labelTrovaprezzi = "Trovaprezzi";
@@ -24,6 +25,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
     const labelTopnegozi = "Topnegozi";
     const labelTwenga = "Twenga";
     const labelShopAlike = "Shop Alike";
+    const labelFacebook = "Facebook";
     
     public function toOptionArray()
     {
@@ -35,6 +37,7 @@ class ItServ_Feed_Model_System_Config_Source_Destinazioni
             array('value'=>self::Topnegozi, 'label'=>self::labelTopnegozi),
             array('value'=>self::Twenga, 'label'=>self::labelTwenga),
             array('value'=>self::ShopAlike, 'label'=>self::labelShopAlike),
+            array('value'=>self::Facebook, 'label'=>self::labelFacebook),
         );
     }
     
