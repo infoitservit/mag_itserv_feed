@@ -38,7 +38,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 
     protected function getTitle() {
-        $this->_title = $this->_prodotto->getName();
+        $this->_title = ucfirst($this->_prodotto->getName());
         return $this->_title;
     }
 

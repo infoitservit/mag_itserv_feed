@@ -17,7 +17,7 @@ class Itserv_Feed_Model_Prodotto_Shopping extends Itserv_Feed_Model_Prodotto_Abs
         $array = array(
             'title' => $this->getTitle(),
             'link' => $this->getLink(),
-            'description' => strip_tags($this->getShortDescription()),
+            'description' => (strlen(strip_tags($this->getShortDescription()) > 0))  ? strip_tags($this->getShortDescription()) : $this->getLongDescription(),
             'g:product_type' => $this->getPathCategoria(),
             //'g:custom_label_0' => $this->getPathCategoria(),
             'g:id' => $this->getSku(),
