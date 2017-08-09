@@ -39,7 +39,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
 
     protected function getTitle() {
         $this->_title = ucfirst(strtolower($this->_prodotto->getName()));
-        return $this->_title;
+        return "<![CDATA[".$this->_title."]]>";
     }
 
     protected function getLink() {
@@ -49,12 +49,12 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
 
     protected function getShortDescription($maxCaratteri = 300) {
         $this->_shortDescription = strip_tags(substr($this->_prodotto->getShortDescription(), 0, $maxCaratteri));
-        return $this->_shortDescription;
+        return "<![CDATA[".$this->_shortDescription."]]>";
     }
 
     protected function getLongDescription($maxCaratteri = 300) {
         $this->_longDescription = strip_tags(substr($this->_prodotto->getDescription(), 0, $maxCaratteri));
-        return $this->_longDescription;
+        return "<![CDATA[".$this->_longDescription."]]>";
     }
 
     protected function getSku() {
@@ -122,7 +122,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
 
     protected function getBrand() {
         $this->_brand = ($this->_prodotto->getAttributeText('manufacturer') != "") ? $this->_prodotto->getAttributeText('manufacturer') : false;
-        return $this->_brand;
+        return "<![CDATA[".$this->_brand."]]>";
     }
 
     protected function getMpn() {
@@ -168,7 +168,7 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
             }
         }
         $this->_categoria = $path;
-        return $this->_categoria;
+        return "<![CDATA[".$this->_categoria."]]>";
     }
 
     /**
