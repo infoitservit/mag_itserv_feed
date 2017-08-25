@@ -144,15 +144,17 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 	
     protected function getTaglia() {
-        if ($this->_prodotto->offsetExists('taglia') && $this->_prodotto->getAttributeText('taglia') != "") {
-            $this->_taglia = $this->_prodotto->getAttributeText('taglia') != "");
+	$attribute_name = Mage::getStoreConfig('feed_options/mappa_attributi/taglia');
+        if ($this->_prodotto->offsetExists($attribute_name) && $this->_prodotto->getAttributeText($attribute_name) != "") {
+            $this->_taglia = $this->_prodotto->getAttributeText($attribute_name);
 	}
         return $this->_taglia;
     }
 
     protected function getColore() {
-        if ($this->_prodotto->offsetExists('colore') && $this->_prodotto->getAttributeText('colore') != "") {
-            $this->_colore = $this->_prodotto->getAttributeText('colore') != "");
+	$attribute_name = Mage::getStoreConfig('feed_options/mappa_attributi/colore');
+        if ($this->_prodotto->offsetExists($attribute_name) && $this->_prodotto->getAttributeText($attribute_name) != "") {
+            $this->_colore = $this->_prodotto->getAttributeText($attribute_name);
 	}
         return $this->_colore;
     }
