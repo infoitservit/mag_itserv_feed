@@ -96,7 +96,7 @@
                         <colore translate="label comment">
                             <label>Attributo "Colore"</label>
                             <comment>
-                <![CDATA[Indicare il codice dell'attributo che definisce il "colore". Di default "color"]]>
+                <![CDATA[Indicare il codice dell'attributo che definisce il "colore". Di default "colore"]]>
                             </comment>
                             <frontend_type>text</frontend_type>              
                             <sort_order>13</sort_order>
@@ -104,6 +104,17 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </colore> 
+			<taglia translate="label comment">
+                            <label>Attributo "Taglia"</label>
+                            <comment>
+                <![CDATA[Indicare il codice dell'attributo che definisce la "taglia/numero/misura". Di default "taglia"]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </taglia>
                     </fields>
                 </mappa_attributi> 
                 <spedizione>

@@ -32,6 +32,14 @@ class Itserv_Feed_Model_Prodotto_Shopping extends Itserv_Feed_Model_Prodotto_Abs
         if($this->getEan() != false) {
             $array["g:ean"] = $this->getEan();
         }
+
+	if($this->getTaglia() != false) {
+            $array["g:size"] = $this->getTaglia();
+        }
+
+	if($this->getColore() != false) {
+            $array["g:color"] = $this->getColore();
+        }
         
         if($this->getSpecialPrice() && ($this->getSpecialPrice() < $this->getPrice())) {
             $array["g:sale_price"] = $this->getSpecialPrice();

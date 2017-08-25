@@ -63,7 +63,9 @@
             <mappa_attributi>
                 <produttore>manufacturer</produttore>
                 <ean>ean</ean>
-                <mpn>mpn</mpn>                
+                <mpn>mpn</mpn>
+                <taglia>taglia</taglia>
+                <colore>colore</colore>                                                                
             </mappa_attributi>
             <trovaprezzi>
                 <tempi_spedizione>1-1</tempi_spedizione>

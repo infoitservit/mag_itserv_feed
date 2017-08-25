@@ -14,6 +14,8 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     protected $_condition = false;
     protected $_categoria = false;
     protected $_ean = false;
+    protected $_taglia = false;
+    protected $_colore = false;
     protected $_imageLink = false;
     protected $_link = false;
     protected $_longDescription = false;
@@ -139,6 +141,20 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
             $this->_ean = ($this->_prodotto->getData('ean') != "") ? $this->_prodotto->getData('ean') : "Non Definito";
         }
         return $this->_ean;
+    }
+	
+    protected function getTaglia() {
+        if ($this->_prodotto->offsetExists('taglia') && $this->_prodotto->getAttributeText('taglia') != "") {
+            $this->_taglia = $this->_prodotto->getAttributeText('taglia') != "");
+	}
+        return $this->_taglia;
+    }
+
+    protected function getColore() {
+        if ($this->_prodotto->offsetExists('colore') && $this->_prodotto->getAttributeText('colore') != "") {
+            $this->_colore = $this->_prodotto->getAttributeText('colore') != "");
+	}
+        return $this->_colore;
     }
 
     protected function getPathCategoria($separatore = '&gt;', $profondita = null) {
