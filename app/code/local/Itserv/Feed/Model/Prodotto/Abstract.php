@@ -55,7 +55,14 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 
     protected function getLongDescription($maxCaratteri = 300) {
-        $this->_longDescription = strip_tags(substr($this->_prodotto->getDescription(), 0, $maxCaratteri));
+	$attribute_name = Mage::getStoreConfig('feed_options/mappa_attributi/descrizione');
+	if($attribute_name == "description") {
+		$this->_longDescription = strip_tags(substr($this->_prodotto->getDescription(), 0, $maxCaratteri));
+	}
+	else{
+           $this->_longDescription = strip_tags(substr($this->_prodotto->getAttributeText($attribute_name), 0, $max_caratteri));
+	}
+        
         return $this->_longDescription;
     }
 

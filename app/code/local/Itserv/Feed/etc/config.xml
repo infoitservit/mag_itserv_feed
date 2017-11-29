@@ -61,6 +61,7 @@
     <default>
         <feed_options>
             <mappa_attributi>
+                <descrizione>description</descrizione>
                 <produttore>manufacturer</produttore>
                 <ean>ean</ean>
                 <mpn>mpn</mpn>
