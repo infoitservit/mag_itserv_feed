@@ -82,8 +82,10 @@ abstract class Itserv_Feed_Model_Prodotto_Abstract {
     }
 
     protected function getSpecialPrice() {
-        $this->_specialPrice = $this->_prodotto->getSpecialPrice();
-        return floatval($this->_specialPrice);
+        //$this->_specialPrice = $this->_prodotto->getSpecialPrice();
+        $priceWithRule = Mage::getModel('catalogrule/rule')->calcProductPriceRule($this->_prodotto->setStoreId('1')->setCustomerGroupId('0'),$this->_prodotto->getSpecialPrice());
+        $this->_specialPrice = ($priceWithRule != NULL ? $priceWithRule : $this->_prodotto->getSpecialPrice());
+        return round(floatval($this->_specialPrice),2);
     }
 
     /**
